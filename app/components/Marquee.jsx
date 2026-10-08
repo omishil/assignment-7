@@ -30,7 +30,7 @@ const Marqueee =async () => {
         </span>
 
         <span className="text-gray-700">
-          ৳{product.today}/{product.unit || "kg"}
+          ৳{product.today}/{product.unit }
         </span>
 
         <span
@@ -40,7 +40,7 @@ const Marqueee =async () => {
               : "font-medium text-green-600"
           }
         >
-          {changeEmoji} {product.change?.pct ?? 0}%
+          {changeEmoji} {product.change?.pct}%
         </span>
       </Link>
     );
