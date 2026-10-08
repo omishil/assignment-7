@@ -1,69 +1,59 @@
-import React, { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { cacheLife } from "next/cache";
 
-async function getProducts() {
-//   facing caching error here so used this solution from nextjs
-    "use cache";
-
-  cacheLife("hours");
-
-  const res = await fetch(
-    "https://api.abcz.workers.dev/api/bazardor/products"
-  );
-  return res.json();
-}
+export const instant = false;
 
 async function CategoryContent({ params }) {
   const { slug } = await params;
 
-  const products = await getProducts();
+  const res = await fetch(
+    "https://api.abcz.workers.dev/api/bazardor/products");
 
+  const products = await res.json();
 
   const categoryProducts = products.filter(
     (product) => product.category === slug
   );
-
   return (
     <>
       {/* Category summary */}
-  <section className="mx-auto w-4/5 py-5 sm:py-8">
-  <div className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-3 shadow-sm sm:gap-4 sm:p-5">
-    <span className="text-4xl sm:text-6xl">
-      {categoryProducts[0].categoryIcon}
-    </span>
+      <section className="mx-auto w-4/5 py-5 sm:py-8">
+        <div className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-3 shadow-sm sm:gap-4 sm:p-5">
+          <span className="text-4xl sm:text-6xl">
+            {categoryProducts[0].categoryIcon}
+          </span>
 
-    <div>
-      <h1 className="text-lg font-bold text-gray-900 sm:text-2xl">
-        {categoryProducts[0].categoryNameBn}
-      </h1>
+          <div>
+            <h1 className="text-lg font-bold text-gray-900 sm:text-2xl">
+              {categoryProducts[0].categoryNameBn}
+            </h1>
 
-      <p className="mt-1 text-[10px] text-gray-500 sm:text-sm">
-        মোট {categoryProducts.length}টি পণ্যের আজকের দাম ও পরিবর্তন
-      </p>
-    </div>
-  </div>
-</section>
+            <p className="mt-1 text-[10px] text-gray-500 sm:text-sm">
+              মোট {categoryProducts.length}টি পণ্যের আজকের দাম ও পরিবর্তন
+            </p>
+          </div>
+        </div>
+      </section>
 
-{/* Controls */}
-<section className="mx-auto w-4/5">
-  <div className="flex justify-end gap-2 rounded-2xl border border-gray-200 bg-white p-3 shadow-sm sm:p-4">
-    <button
-      type="button"
-      className="rounded-lg bg-green-600 px-3 py-1.5 text-xs font-medium text-white sm:px-4 sm:py-2 sm:text-sm"
-    >
-      সাজান
-    </button>
+      {/* Controls */}
+      <section className="mx-auto w-4/5">
+        <div className="flex justify-end gap-2 rounded-2xl border border-gray-200 bg-white p-3 shadow-sm sm:p-4">
+          <button
+            type="button"
+            className="rounded-lg bg-green-600 px-3 py-1.5 text-xs font-medium text-white sm:px-4 sm:py-2 sm:text-sm"
+          >
+            সাজান
+          </button>
 
-    <button
-      type="button"
-      className="rounded-lg border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 sm:px-4 sm:py-2 sm:text-sm"
-    >
-      ডিফল্ট
-    </button>
-  </div>
-</section>
+          <button
+            type="button"
+            className="rounded-lg border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 sm:px-4 sm:py-2 sm:text-sm"
+          >
+            ডিফল্ট
+          </button>
+        </div>
+      </section>
+
       {/* Products */}
       <section className="mx-auto w-4/5 py-8">
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
@@ -131,27 +121,4 @@ async function CategoryContent({ params }) {
   );
 }
 
-// function CategorySkeleton() {
-//   return (
-//     <div className="mx-auto w-4/5 py-8">
-//       <div className="h-28 animate-pulse rounded-2xl bg-gray-200" />
-//       <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-//         {Array.from({ length: 8 }).map((_, i) => (
-//           <div key={i} className="h-24 animate-pulse rounded-2xl bg-gray-200" />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
-
-const CategoryPage = ({ params }) => {
-  return (
-    <main className="w-full">
-      <Suspense fallback='loading'>
-        <CategoryContent params={params} />
-      </Suspense>
-    </main>
-  );
-};
-
-export default CategoryPage;
+export default CategoryContent;

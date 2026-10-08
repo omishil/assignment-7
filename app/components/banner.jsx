@@ -22,24 +22,24 @@ const Banner = () => {
                         দামের পরিবর্তন এক জায়গায়।
                     </p>
 
-                    <Link
-                        href="/product"
-                        className="mt-5 w-fit rounded-lg bg-green-600 px-4 py-2 text-[10px] font-semibold text-white transition hover:bg-green-700 sm:px-5 sm:py-2.5 sm:text-xs md:text-sm"
-                    >
-                        সব পণ্য দেখুন
-                    </Link>
+                <a
+  href="#AllProd"
+  className="mt-5 w-fit rounded-lg bg-green-600 px-4 py-2 text-[10px] font-semibold text-white transition hover:bg-green-700 sm:px-5 sm:py-2.5 sm:text-xs md:text-sm"
+>
+  সব পণ্য দেখুন
+</a>
                 </div>
 
                 <div className="relative flex w-full items-center justify-center p-4 md:w-1/2 md:p-5">
                     <div className="relative h-48 w-full sm:h-56 md:h-[80%]">
-                        <Image
-                            src="/bazar-hero.png"
-                            alt="বাজারের পণ্য"
-                            // fill
-                            className="rounded-2xl "
-                            width={400}
-                            height={400}
-                        />
+                       <Image
+  src="/bazar-hero.png"
+  alt="বাজারের পণ্য"
+  width={400}
+  height={400}
+  loading="eager"
+  className="h-[80%] w-[80%] object-contain "
+/>
                     </div>
                 </div>
 

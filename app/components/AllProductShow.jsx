@@ -7,7 +7,7 @@ const AllProductsSection = async () => {
   const products = await res.json();
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-4 py-6">
+    <section className=" mx-auto w-full max-w-7xl px-4 py-6" id="AllProd">
       <h2 className="mb-1 text-xl font-bold text-gray-900">
         সব পণ্য
       </h2>

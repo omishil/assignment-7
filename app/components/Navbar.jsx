@@ -1,6 +1,7 @@
 import Image from "next/image";
 import NavLinks from "./NavLinks";
 import { Suspense } from "react";
+import Link from "next/link";
 
 const Navbar = () => {
     return (
@@ -18,7 +19,7 @@ const Navbar = () => {
                         height={24}
                         className="h-6 w-6 sm:h-7 sm:w-7 object-contain bg-green-500 p-1 rounded-[5px]"
                     />
-
+<Link href='/'>
                     <div className="flex flex-col">
                         <span className="text-sm sm:text-base md:text-xl font-bold text-black">
                             বাজার দর
@@ -27,7 +28,7 @@ const Navbar = () => {
                         <span className="text-[9px] sm:text-xs md:text-sm text-gray-500">
                             ৬ অক্টোবর ২০২৬
                         </span>
-                    </div>
+                    </div></Link>
 
                 </div>
 
