@@ -23,7 +23,7 @@ const Banner = () => {
                     </p>
 
                     <Link
-                        href="/products"
+                        href="/product"
                         className="mt-5 w-fit rounded-lg bg-green-600 px-4 py-2 text-[10px] font-semibold text-white transition hover:bg-green-700 sm:px-5 sm:py-2.5 sm:text-xs md:text-sm"
                     >
                         সব পণ্য দেখুন

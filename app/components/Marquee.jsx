@@ -1,10 +1,12 @@
+// 'use client'
+
 import React from 'react';
 import Link from 'next/link';
 import Marquee from "react-fast-marquee";
 const Marqueee =async () => {
     
 
-    const res= await fetch("https://api.api-store.workers.dev/api/bazardor/products")
+    const res= await fetch("https://api.abcz.workers.dev/api/bazardor/products")
     const products= await res.json()
     return (
         <div>
@@ -20,7 +22,7 @@ const Marqueee =async () => {
     return (
       <Link
         key={product.id}
-        href={`/category/${product.category}`}
+        href={`/product/${product.slug}`}
         className="mx-1 flex items-center gap-1 rounded-full border border-gray-200 bg-white px-2 py-1 text-xs shadow-sm"
       >
         <span className="text-base">{product.image}</span>
