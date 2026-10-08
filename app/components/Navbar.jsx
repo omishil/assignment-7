@@ -1,4 +1,6 @@
 import Image from "next/image";
+import NavLinks from "./NavLinks";
+import { Suspense } from "react";
 
 const Navbar = () => {
     return (
@@ -53,6 +55,10 @@ const Navbar = () => {
                 </div>
 
             </div>
+
+   <Suspense fallback={<div>Loading...</div>}>
+                <NavLinks />
+            </Suspense>
 
         </nav>
     );
