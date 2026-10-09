@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export default async function Marquee() {
-  const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products");
+  const res = await fetch("https://api.api-store.workers.dev/api/bazardor/products");
   const products = await res.json();
   const cards = products.map((product) => {
     const isUp = product.change?.dir === "up";

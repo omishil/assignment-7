@@ -17,6 +17,18 @@ export default function SignIn() {
 
     console.log("Signed in:", data);
   }
+  const HandleGoogleSignIn = async () => {
+  const data = await signIn.social({
+    provider: "google",
+  });
+  console.log('after goog sign in', data);
+};
+const HandleGithubSignIn = async () => {
+  const data = await signIn.social({
+    provider: "github",
+  });
+  console.log("after github sign in", data);
+};
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-green-50 px-4 py-12">
       <section className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
@@ -62,6 +74,27 @@ export default function SignIn() {
             </Link>
           </p>
         </form>
+
+<div className="mt-4 flex flex-col gap-2 sm:flex-row sm:gap-3">
+  <button
+    type="button"
+    onClick={HandleGoogleSignIn}
+    className="w-full rounded-lg bg-blue-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-600 sm:text-base"
+  >
+    Google
+  </button>
+
+  <button
+    type="button"
+    onClick={HandleGithubSignIn}
+    className="w-full rounded-lg bg-gray-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-gray-900 sm:text-base"
+  >
+    GitHub
+  </button>
+</div>
+
+
+
       </section>
 
       <Link
