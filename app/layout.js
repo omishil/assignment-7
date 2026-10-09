@@ -1,6 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import { Suspense } from "react";
+import Marquee from "./components/Marquee";
+import NavLinks from "./components/NavLinks";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +28,16 @@ export default function RootLayout({ children }) {
     >
       <body className="bg-green-50 min-h-full flex flex-col">
         <Navbar></Navbar>
+
+           <Suspense fallback={<div>Loading...</div>}>
+                        <NavLinks />
+                        
+                         {/* <Marquee></Marquee> */}
+                    </Suspense>
+       <Suspense
+       fallback='loading'>     <Marquee></Marquee></Suspense>
+            
+
         {children}</body>
     </html>
   );

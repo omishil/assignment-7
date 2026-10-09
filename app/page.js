@@ -10,7 +10,7 @@ export default function Home() {
     <div className="">
       <Suspense fallback='loading'>  
         
-        <Marquee></Marquee>
+        {/* <Marquee></Marquee> */}
         
         
         

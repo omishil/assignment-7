@@ -1,3 +1,4 @@
+// 'use client'
 import React from 'react';
 import Link from 'next/link';
 
@@ -8,7 +9,7 @@ const NavLinks = async () => {
 // const categories = Array.isArray(data) ? data : [];
 
 return (
-        <div className="      mt-3 flex flex-wrap items-center gap-1.5 sm:mt-4 sm:gap-2">
+        <div className="relative left-0 sm:left-10      mt-3 flex flex-wrap items-center gap-1.5 sm:mt-4 sm:gap-2">
             {categories.map((category) => (
              
              <Link

@@ -3,3 +3,31 @@
 html {
   scroll-behavior: smooth;
 }
+/* marqueee */
+.market-marquee {
+  width: 100%;
+  overflow: hidden;
+  background: #f1f5f9;
+  padding: 4px 0;
+}
+
+.market-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: market-marquee 32s linear infinite;
+}
+
+.market-marquee-track > div {
+  display: flex;
+  flex-shrink: 0;
+}
+
+@keyframes market-marquee {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}

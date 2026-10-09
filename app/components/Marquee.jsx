@@ -1,55 +1,41 @@
-// 'use client'
+import Link from "next/link";
 
-import React from 'react';
-import Link from 'next/link';
-import Marquee from "react-fast-marquee";
-const Marqueee =async () => {
-    
-
-    const res= await fetch("https://api.abcz.workers.dev/api/bazardor/products")
-    const products= await res.json()
-    return (
-        <div>
-           <Marquee
-  direction="right"
-  speed={200}
-  className="bg-slate-100 py-1"
->
-  {products.map((product) => {
+export default async function Marquee() {
+  const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products");
+  const products = await res.json();
+  const cards = products.map((product) => {
     const isUp = product.change?.dir === "up";
-    const changeEmoji = isUp ? "🔺" : "🔻";
 
     return (
       <Link
         key={product.id}
         href={`/product/${product.slug}`}
-        className="mx-1 flex items-center gap-1 rounded-full border border-gray-200 bg-white px-2 py-1 text-xs shadow-sm"
+        className="mx-1 inline-flex shrink-0 items-center gap-1 rounded-full border border-gray-200 bg-white px-2 py-1 text-xs shadow-sm"
       >
-        <span className="text-base">{product.image}</span>
-
+        <span>{product.image}</span>
         <span className="font-semibold text-gray-800">
           {product.nameBn}
         </span>
-
-        <span className="text-gray-700">
-          ৳{product.today}/{product.unit }
+        <span>
+         {product.today} টাকা/{product.unit}
         </span>
-
-        <span
-          className={
-            isUp
-              ? "font-medium text-red-500"
-              : "font-medium text-green-600"
-          }
-        >
-          {changeEmoji} {product.change?.pct}%
-        </span>
+    <span
+  className={
+    isUp? "text-red-500": product.change?.dir === "down"? "text-green-600": "text-gray-500"}
+>
+  {isUp? "🔺" : product.change?.dir === "down"? "🔻": "—"}{" "}
+  {isUp || product.change?.dir === "down"? Math.abs(Number(product.change?.pct ?? 0)) : "0.0"}%
+</span>
       </Link>
     );
-  })}
-</Marquee>
-        </div>
-    );
-};
+  });
 
-export default Marqueee;
+  return (
+    <div className="market-marquee">
+      <div className="market-marquee-track" style={{animationDuration: '32s'}}>
+        <div>{cards}</div>
+        <div aria-hidden="true">{cards}</div>
+      </div>
+    </div>
+  );
+}

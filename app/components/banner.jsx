@@ -10,7 +10,7 @@ const Banner = () => {
                 <div className="flex w-full flex-col justify-center px-5 py-6 sm:px-7 md:w-1/2 md:px-10 md:py-8 ">
 
                     <span className="mb-3 w-fit rounded-md bg-green-300 px-2.5 py-1 text-[10px] font-semibold text-green-700 sm:text-xs md:text-sm">
-                        ৮ অক্টোবর ২০২৬
+                        ৬ অক্টোবর ২০২৬
                     </span>
                     <h1 className="text-xl font-bold leading-tight text-gray-900 sm:text-2xl md:text-3xl">
                         আজকের বাজারের দাম এক নজরে

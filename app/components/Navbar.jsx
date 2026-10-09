@@ -1,9 +1,16 @@
+"use client";
 import Image from "next/image";
 import NavLinks from "./NavLinks";
 import { Suspense } from "react";
 import Link from "next/link";
-
+import Marquee from "./Marquee";
+import { signOut } from "../lib/auth-client";
+import { useSession } from "../lib/auth-client";import { useState } from "react";
 const Navbar = () => {
+const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+const {data: session}= useSession()
+console.log('user session in navbar', session);
+
     return (
         <nav className="w-[95%] sm:w-[90%] md:w-[85%] mx-auto mt-3 sm:mt-5 rounded-xl sm:rounded-2xl bg-white px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 shadow-sm">
 
@@ -33,33 +40,61 @@ const Navbar = () => {
                 </div>
 
                 {/* Right Side */}
-                <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
+       <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
+ {session?.user ? (
+  <div className="relative">
+    <button
+      type="button"
+      onClick={() => setIsUserMenuOpen((open) => !open)}
+      className="rounded-lg px-2 py-1.5 text-xs font-medium text-gray-800 hover:bg-gray-100 sm:px-3 sm:py-2 md:text-base"
+    >
+      Welcome, {session.user.name} ▾
+    </button>
 
-                    <button
-                        className="rounded-lg sm:rounded-xl bg-gray-200 px-2 py-1.5 sm:px-3 sm:py-2 md:px-5 md:py-2.5
-                                   text-[10px] sm:text-xs md:text-base
-                                   font-medium text-black
-                                   transition hover:bg-gray-300"
-                    >
-                        সাইন ইন
-                    </button>
+    {isUserMenuOpen && (
+      <div className="absolute right-0 z-50 mt-2 w-40 rounded-lg border border-gray-200 bg-white p-1 shadow-lg">
+        <Link
+          href="/profile"
+          onClick={() => setIsUserMenuOpen(false)}
+          className="block rounded-md px-3 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700"
+        >
+          Profile
+        </Link>
 
-                    <button
-                        className="rounded-lg sm:rounded-xl bg-green-600 px-2 py-1.5 sm:px-3 sm:py-2 md:px-5 md:py-2.5
-                                   text-[10px] sm:text-xs md:text-base
-                                   font-medium text-white
-                                   transition hover:bg-green-700"
-                    >
-                        সাইন আপ
-                    </button>
+        <button
+          type="button"
+          onClick={ () => {
+             signOut();
+          }}
+          className="block w-full rounded-md px-3 py-2 text-left text-sm text-red-600 hover:bg-red-50"
+        >
+          লগ আউট
+        </button>
+      </div>
+    )}
+  </div>
+) : (
+    <>
+      <Link
+        href="/SignIn"
+        className="rounded-lg bg-gray-200 px-2 py-1.5 text-[10px] font-medium text-black hover:bg-gray-300 sm:px-3 sm:py-2 sm:text-xs md:px-5 md:py-2.5 md:text-base"
+      >
+        সাইন ইন
+      </Link>
 
-                </div>
-
+      <Link
+        href="/Signup"
+        className="rounded-lg bg-green-600 px-2 py-1.5 text-[10px] font-medium text-white hover:bg-green-700 sm:px-3 sm:py-2 sm:text-xs md:px-5 md:py-2.5 md:text-base"
+      >
+        সাইন আপ
+      </Link>
+    </>
+  )}
+</div>
             </div>
 
-   <Suspense fallback={<div>Loading...</div>}>
-                <NavLinks />
-            </Suspense>
+
+        {/* <Suspense fallback='loading'></Suspense> */}
 
         </nav>
     );
