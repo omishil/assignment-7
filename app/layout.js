@@ -4,7 +4,10 @@ import Navbar from "./components/Navbar";
 import { Suspense } from "react";
 import Marquee from "./components/Marquee";
 import NavLinks from "./components/NavLinks";
+import { Toaster } from "sonner";
+import Footer from "./components/Footer";
 
+<Toaster position="top-right" />
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -37,8 +40,13 @@ export default function RootLayout({ children }) {
        <Suspense
        fallback='loading'>     <Marquee></Marquee></Suspense>
             
+  <Toaster position="top-right" />
+        {children}
+                <Footer></Footer>
 
-        {children}</body>
+        
+        </body>
+
     </html>
   );
 }

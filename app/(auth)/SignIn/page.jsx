@@ -1,4 +1,5 @@
 "use client";
+import { toast } from "sonner";
 
 import { signIn } from "../../lib/auth-client";
 import Link from "next/link";
@@ -12,8 +13,18 @@ export default function SignIn() {
     const { data, error } = await signIn.email({
       email: entries.email,
       password: entries.password,
-      callbackURL:'/',
+      // callbackURL:'/',
     });
+  if (error) {
+    toast.error("Invalid email or password.");
+    return;
+  }
+
+toast.success("Login successful!");
+setTimeout(() => {
+  window.location.href = "/";
+}, 600);
+
 
     console.log("Signed in:", data);
   }
@@ -31,49 +42,79 @@ const HandleGithubSignIn = async () => {
 };
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-green-50 px-4 py-12">
-      <section className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
+     
+      <h1 className="text-3xl font-bold text-gray-900">Sign in</h1>
+
+          <p className="mt-2 text-sm text-gray-500 mb-3">
+            Welcome back. Sign in to continue.
+          </p>
+     
+     
+     
+     
+      <section className="w-full max-w-md rounded-2xl bg-white p-5 shadow-xl">
         <div className="mb-6 text-center">
-          <h1 className="text-3xl font-bold text-gray-900">Sign in</h1>
+          {/* <h1 className="text-3xl font-bold text-gray-900">Sign in</h1>
 
           <p className="mt-2 text-sm text-gray-500">
             Welcome back. Sign in to continue.
-          </p>
+          </p> */}
         </div>
 
         <form onSubmit={onSubmit} className="flex flex-col gap-4">
-          <input
-            name="email"
-            type="email"
-            placeholder="example: Omi@gmail.com"
-            required
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-green-600 focus:ring-2 focus:ring-green-200"
-          />
+  <div className="flex flex-col gap-1.5">
+    <label
+      htmlFor="email"
+      className="text-sm font-medium text-gray-700"
+    >
+      Email
+    </label>
 
-          <input
-            name="password"
-            type="password"
-            placeholder="Enter your password"
-            required
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-green-600 focus:ring-2 focus:ring-green-200"
-          />
+    <input
+      id="email"
+      name="email"
+      type="email"
+      placeholder="example: Omi@gmail.com"
+      required
+      className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-green-600 focus:ring-2 focus:ring-green-200"
+    />
+  </div>
 
-          <button
-            type="submit"
-            className="rounded-lg bg-green-600 px-4 py-2.5 font-semibold text-white hover:bg-green-700"
-          >
-            Sign in
-          </button>
+  <div className="flex flex-col gap-1.5">
+    <label
+      htmlFor="password"
+      className="text-sm font-medium text-gray-700"
+    >
+      Password
+    </label>
 
-          <p className="text-center text-sm text-gray-600">
-            Don't have an account?
-            <Link
-              href="/Signup"
-              className="font-semibold text-green-600 hover:underline"
-            >
-              Sign up
-            </Link>
-          </p>
-        </form>
+    <input
+      id="password"
+      name="password"
+      type="password"
+      placeholder="Enter your password"
+      required
+      className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-green-600 focus:ring-2 focus:ring-green-200"
+    />
+  </div>
+
+  <button
+    type="submit"
+    className="rounded-lg bg-green-600 px-4 py-2.5 font-semibold text-white hover:bg-green-700"
+  >
+    Sign in
+  </button>
+
+  <p className="text-center text-sm text-gray-600">
+    Don't have an account?{" "}
+    <Link
+      href="/Signup"
+      className="font-semibold text-green-600 hover:underline"
+    >
+      Sign up
+    </Link>
+  </p>
+</form>
 
 <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:gap-3">
   <button

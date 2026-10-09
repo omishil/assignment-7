@@ -22,6 +22,15 @@ const AllProductsSection = async () => {
 
           const changeIcon = isUp ? "🔺" : isDown ? "🔻" : "—";
 
+
+//  <span
+//   className={
+//     isUp? "text-red-500": product.change?.dir === "down"? "text-green-600": "text-gray-500"}
+// >
+//   {isUp? "🔺" : product.change?.dir === "down"? "🔻": "—"}{" "}
+//   {isUp || product.change?.dir === "down"? Math.abs(Number(product.change?.pct ?? 0)) : "0.0"}%
+// </span>
+
           const changeColor = isUp
             ? "text-red-500"
             : isDown
@@ -62,14 +71,16 @@ className="relative flex items-center justify-between rounded-2xl border border-
 </div>
                 </div>
 
-                <div
-                    className={`absolute bottom-0 right-2 flex items-center gap-0 ${changeColor}`}
-                >
-<span className="text-xl">{changeIcon}</span>
-
-                    <span className="text-[10px] font-semibold">
-{product.change?.pct}%
-                    </span>
+       <div
+  className={`absolute bottom-1 right-2 flex items-center ${changeColor}`}
+>
+  <span className="text-[10px] font-medium leading-none sm:text-xs md:text-sm">
+    {changeIcon}{" "}
+    {isUp || isDown
+      ? Math.abs(Number(product.change?.pct ?? 0))
+      : "0.0"}
+    %
+  </span>
 </div>
                 </Link>
           );

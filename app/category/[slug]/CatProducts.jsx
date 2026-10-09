@@ -13,7 +13,6 @@ export default function CategoryProducts({ products }) {
   if (sort === "low") {
     sortedProducts.sort((a, b) => Number(a.today) - Number(b.today));
   }
-
   if (sort === "high") {
     sortedProducts.sort((a, b) => Number(b.today) - Number(a.today));
   }
@@ -23,7 +22,7 @@ export default function CategoryProducts({ products }) {
       <main className="flex min-h-screen items-center justify-center bg-green-50 px-4">
         <section className="rounded-2xl bg-white p-8 text-center shadow-md">
           <h1 className="text-2xl font-bold text-gray-900">
-            কোনো পণ্য পাওয়া যায়নি
+          <span className="text-red-600">404!</span>  কোনো পণ্য পাওয়া যায়নি
           </h1>
 
           <p className="mt-2 text-gray-500">
@@ -120,15 +119,17 @@ export default function CategoryProducts({ products }) {
                   </div>
                 </div>
 
-                <div
-                  className={`absolute bottom-0 right-2 flex items-center ${changeColor}`}
-                >
-                  <span className="text-xl">{changeIcon}</span>
-
-                  <span className="text-[10px] font-semibold">
-                    {product.change?.pct ?? 0}%
-                  </span>
-                </div>
+               <div
+  className={`absolute bottom-1 right-2 flex items-center ${changeColor}`}
+>
+  <span className="text-[10px] font-medium leading-none sm:text-xs md:text-sm">
+    {changeIcon}{" "}
+    {isUp || isDown
+      ? Math.abs(Number(product.change?.pct ?? 0))
+      : "0.0"}
+    %
+  </span>
+</div>
               </Link>
             );
           })}

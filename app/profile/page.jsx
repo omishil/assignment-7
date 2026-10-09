@@ -8,8 +8,8 @@ export default function Profile() {
   if (session) {
     const user = session.user;
 
-    async function handleSignOut() {
-   signOut();
+   async  function handleSignOut() {
+   await signOut();
      window.location.href = "/";
 
 }
