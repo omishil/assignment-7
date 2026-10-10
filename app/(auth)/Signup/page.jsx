@@ -2,6 +2,7 @@
 
 import { signUp,signIn } from "../../lib/auth-client";
 import Link from "next/link";
+import { toast } from "sonner";
 export default function SignUp() {
 
 async function onSubmit(event) {
@@ -24,10 +25,11 @@ async function onSubmit(event) {
     console.log("Signup successful:", resData);
 
   
-  if (error) {
-    console.error("Signup failed:", error.message);
-    return;
-  }
+if (error) {
+console.error("Signup failed:");
+toast.error("Signup failed! Please try again.");
+return;
+}
 toast.success("Login successful!");
 setTimeout(() => {
   window.location.href = "/";
@@ -37,6 +39,7 @@ setTimeout(() => {
 
 
 const HandleGoogleSignIn = async () => {
+  
   const data = await signIn.social({
     provider: "google",
   });
@@ -154,7 +157,7 @@ const HandleGithubSignIn = async () => {
       onClick={HandleGoogleSignIn}
       className="w-full rounded-lg bg-blue-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-600 sm:text-base"
     >
-      Google
+      Sign-up with Google
     </button>
 
     <button
@@ -162,7 +165,7 @@ const HandleGithubSignIn = async () => {
       onClick={HandleGithubSignIn}
       className="w-full rounded-lg bg-gray-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-gray-900 sm:text-base"
     >
-      GitHub
+      Sign-up with GitHub
     </button>
   </div>
 </form>

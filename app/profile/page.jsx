@@ -1,7 +1,7 @@
 "use client";
-import { signOut, useSession } from "../lib/auth-client";
+import { updateUser,signOut, useSession } from "../lib/auth-client";
 import Link from "next/link";
-
+import { toast } from "sonner";
 export default function Profile() {
   const { data: session } = useSession();
 
@@ -10,8 +10,29 @@ export default function Profile() {
 
    async  function handleSignOut() {
    await signOut();
-     window.location.href = "/";
+   toast.success("Logged out successfully!");
+      setTimeout(() => {
+           window.location.href = "/";
+         }, 600);
 
+}
+// update name
+async function handleUpdateName() {
+  const name = document.getElementById("name").value.trim();
+
+  if (!name) {
+    toast.error("Name cannot be empty");
+    return;
+  }
+
+  const { error } = await updateUser({ name });
+
+  if (error) {
+    toast.error("Failed to update name");
+  } else {
+    toast.success("Name updated successfully");
+    document.getElementById("name").value = "";
+  }
 }
     return (
       <main className="min-h-screen bg-green-50 px-4 py-8 sm:py-12">
@@ -66,12 +87,13 @@ export default function Profile() {
                 className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-green-600 focus:ring-2 focus:ring-green-200 sm:text-base"
               />
 
-              <button
-                type="button"
-                className="mt-4 w-full rounded-lg bg-green-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-green-700 sm:text-base"
-              >
-                Update
-              </button>
+           <button
+  type="button"
+  onClick={handleUpdateName}
+  className="mt-4 w-full rounded-lg bg-green-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-green-700 sm:text-base"
+>
+  Update
+</button>
             </div>
           </section>
         </div>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cacheLife } from "next/cache";
-
+// import { notFound } from "next/navigation";
 export const instant = false;
 const ProductPage = async ({ params }) => {
   const { slug } = await params;
@@ -15,6 +15,9 @@ const ProductPage = async ({ params }) => {
 
 
   const product = products.find((item) => item.slug === slug);
+if (!product) {
+  notFound();
+}
 
 // const{markets} = product
 

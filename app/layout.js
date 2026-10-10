@@ -6,6 +6,7 @@ import Marquee from "./components/Marquee";
 import NavLinks from "./components/NavLinks";
 import { Toaster } from "sonner";
 import Footer from "./components/Footer";
+import NavLinksSkeleton from "./components/NavLinksSkeleton";
 
 <Toaster position="top-right" />
 const geistSans = Geist({
@@ -32,7 +33,7 @@ export default function RootLayout({ children }) {
       <body className="bg-green-50 min-h-full flex flex-col">
         <Navbar></Navbar>
 
-           <Suspense fallback={<div>Loading...</div>}>
+           <Suspense fallback={<NavLinksSkeleton/>}>
                         <NavLinks />
                         
                          {/* <Marquee></Marquee> */}

@@ -1,9 +1,30 @@
 "use client";
 import { toast } from "sonner";
-
+import { useEffect } from "react";
 import { signIn } from "../../lib/auth-client";
 import Link from "next/link";
 export default function SignIn() {
+
+
+  // if user is redirected to signin 
+    useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("reason") === "product-auth") {
+      toast.error("Please sign in to view product details");
+
+      window.history.replaceState(
+        {},
+        "",
+        window.location.pathname
+      );
+    }
+  }, []);
+
+
+
+
+
   async function onSubmit(event) {
     event.preventDefault();
 
@@ -122,7 +143,7 @@ const HandleGithubSignIn = async () => {
     onClick={HandleGoogleSignIn}
     className="w-full rounded-lg bg-blue-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-600 sm:text-base"
   >
-    Google
+   Sign-in with Google
   </button>
 
   <button
@@ -130,7 +151,7 @@ const HandleGithubSignIn = async () => {
     onClick={HandleGithubSignIn}
     className="w-full rounded-lg bg-gray-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-gray-900 sm:text-base"
   >
-    GitHub
+   sign in with GitHub
   </button>
 </div>
 
