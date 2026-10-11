@@ -5,22 +5,31 @@ import Banner from "./components/banner";
 import PriceINcreateSection from "./components/PriceINcreateSection";
 import PriceDecreaseSection from "./components/PrcDecreSection";
 import AllProductsSection from "./components/AllProductShow";
+import ProductSectionSkeleton from "./components/ProductSectionSkeleton";
 export default function Home() {
   return (
     <div className="">
-      <Suspense fallback='loading'>  
+      <Suspense >  
         
         {/* <Marquee></Marquee> */}
-        
+           <Banner></Banner>
+
         
         
         </Suspense>
-   <Banner></Banner>
-   <Suspense fallback='loading'> 
+   <Suspense   fallback={<ProductSectionSkeleton />
+  }> 
     <PriceINcreateSection></PriceINcreateSection>
-    <PriceDecreaseSection></PriceDecreaseSection>
-    <AllProductsSection></AllProductsSection>
     </Suspense>
+    <Suspense   fallback={<ProductSectionSkeleton />
+  }>     <PriceDecreaseSection></PriceDecreaseSection>
+</Suspense>
+    
+    <Suspense   fallback={<ProductSectionSkeleton count={33}/>
+  }>     <AllProductsSection ></AllProductsSection>
+</Suspense>
+    
+    
   
     </div>
   );
